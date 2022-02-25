@@ -1,0 +1,16 @@
+{
+  "name": "powerbanks_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "composite.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gm": "^1.23.1",
+    "moment": "^2.29.1",
+    "sharp": "^0.30.1"
+  }
+}
