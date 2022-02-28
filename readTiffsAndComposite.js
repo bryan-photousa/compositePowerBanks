@@ -2,7 +2,6 @@ const fs = require('fs'),
  gm = require('gm'),
  sharp = require('sharp'),
  moment = require('moment');
-
 const compositeService = require('./services/composite.services');
 
 let powerbankDirectories = [
@@ -197,9 +196,9 @@ addColorChannelAndWriteToDisk = (filename, artworksPath, compositeId) => {
     (err, result) => {
      if (err) throw err;
      console.log('filename saved in nas: ' + JSON.stringify(filename));
-     // compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
-     //   console.log("response: " + JSON.stringify(response));
-     // });
+     compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
+       console.log("response: " + JSON.stringify(response));
+     });
     }
    );
   //settodownloadedbycomposite ID
