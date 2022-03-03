@@ -3,3 +3,5 @@ node_modules/
 tiff_images/
 
 process/
+
+*.tiff

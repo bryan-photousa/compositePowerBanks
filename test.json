@@ -1,4 +1,55 @@
-[
- "/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_869903-2022-03-02/images_869903-2022-03-02/1891025_M103PD-BLK.tiff",
- "/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_869903-2022-03-02/images_869903-2022-03-02/1891029_M103PD-BLK.tiff"
-]
+{
+ "order": {
+  "order_info": {
+   "partner_order_id": "hrnva",
+   "username": "TJ Originals",
+   "token": "90f281cdb11d481350cdb9ee1c9a15a2",
+   "order_datetime": "2022-3-3 14:33:21",
+   "source": "pvp.com",
+   "callback_url": "https://services.printversepro.com/order_info/hrnva"
+  },
+  "ship_from_info": {
+   "ship_from_company": "Photo USA",
+   "ship_from_fname": "Customer",
+   "ship_from_lname": "Service",
+   "ship_from_street1": "46595 Landing Pkwy",
+   "ship_from_street2": null,
+   "ship_from_street3": "",
+   "ship_from_city": "Fremont",
+   "ship_from_stateprov": "CA",
+   "ship_from_country": "US",
+   "ship_from_country_name": "United States",
+   "ship_from_zip": "94538",
+   "ship_from_phone": "0000000000",
+   "ship_from_email": "info@photomugs.com"
+  },
+  "ship_to_info": {
+   "ship_to_company": "",
+   "ship_to_fname": "Angela B ",
+   "ship_to_lname": "Gilbert",
+   "ship_to_street1": "255 River Road",
+   "ship_to_street2": "",
+   "ship_to_street3": "",
+   "ship_to_city": "Eliot",
+   "ship_to_stateprov": "ME",
+   "ship_to_country": "US",
+   "ship_to_country_name": "United States",
+   "ship_to_zip": "03903",
+   "ship_to_email": "elgroupstaff@gmail.com",
+   "ship_to_method": "STANDARD",
+   "ship_to_code": "STANDARD"
+  },
+  "order_items": {
+   "order_item": [
+    {
+     "order_item_product_code": "21108",
+     "order_item_partner_product_code": "21108",
+     "order_item_quantity": 1,
+     "order_item_image_url": "",
+     "order_item_image_ftp": ""
+    }
+   ]
+  },
+  "order_attachments": { "order_packlist": "DEFAULT", "order_packlist_ftp": "" }
+ }
+}
