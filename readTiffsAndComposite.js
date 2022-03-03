@@ -11,29 +11,28 @@ let powerbankDirectories = [
 let nasPath = '/Volumes/nas/48/Zazzle/auto_print/openprint'; //current path for Mac //change to windows path in production
 let today = moment().format('YYYY-MM-DD');
 powerbankDirectories.forEach((value) => {
- let tiffFiles = [];
  let currReadDirectory;
  let compositeId;
  currReadDirectory = nasPath + '/' + value;
  fs.readdir(currReadDirectory, { withFileTypes: true }, (err, subdirs) => {
   subdirs.forEach((dir) => {
+   let tiffFiles = [];
+   let orderDirectory = '';
+   let filename = '';
    if (dir.isDirectory() && dir.name.includes(today)) {
-    currReadDirectory = currReadDirectory + '/' + dir.name;
-
-    fs.readdir(currReadDirectory, { withFileTypes: true }, (err, subdirs1) => {
+    orderDirectory = currReadDirectory + '/' + dir.name;
+    let imageDirectory;
+    fs.readdir(orderDirectory, { withFileTypes: true }, (err, subdirs1) => {
      subdirs1.forEach((dir1) => {
       if (dir1.name.includes('images')) {
-       currReadDirectory = currReadDirectory + '/' + dir1.name;
-       console.log('currReadDirectory' + JSON.stringify(currReadDirectory));
+       imageDirectory = orderDirectory + '/' + dir1.name;
        compositeId = dir1.name.split('_')[1].split('-')[0];
-       console.log('compositeId: ' + JSON.stringify(compositeId));
-       fs.readdir(currReadDirectory, { withFileTypes: true }, (err, files) => {
+       fs.readdir(imageDirectory, { withFileTypes: true }, (err, files) => {
         files.forEach((file) => {
-         let eachFile = currReadDirectory + '/' + file.name;
+         let eachFile = imageDirectory + '/' + file.name;
          tiffFiles.push(eachFile);
         });
         Promise.all(tiffFiles).then(() => {
-         let filename = '';
          let promises = [];
          let extension = '.tiff';
          tiffFiles.forEach((value, index) => {
@@ -47,26 +46,31 @@ powerbankDirectories.forEach((value) => {
           promises.push(index);
          });
          Promise.all(promises).then(() => {
-          filename = filename + extension;
+          let filepath = '';
+          filepath = filename + extension;
           let artworksPath = tiffFiles[0].replace('images', 'artworks');
 
           artworksPath = artworksPath.split('/');
           artworksPath = artworksPath
            .filter((element, index) => index < artworksPath.length - 1)
            .join('/');
-          compositeImages(tiffFiles, filename, artworksPath, compositeId);
+          compositeImages(tiffFiles, filepath, artworksPath, compositeId);
          });
 
-         compositeImages = (tiffFiles, filename, artworksPath, compositeId) => {
+         compositeImages = (tiffFiles, filepath, artworksPath, compositeId) => {
           switch (tiffFiles.length) {
            case 1:
             gm()
              .in('-page', '+0+0')
              .in(tiffFiles[0])
              .mosaic()
-             .write(`${filename}`, function (err) {
+             .write(`${filepath}`, function (err) {
               if (err) console.log(err);
-              addColorChannel(filename, artworksPath, compositeId);
+              addColorChannelAndWriteToDisk(
+               filepath,
+               artworksPath,
+               compositeId
+              );
              });
             break;
            case 2:
@@ -76,10 +80,10 @@ powerbankDirectories.forEach((value) => {
              .in('-page', '+1913.5')
              .in(tiffFiles[1])
              .mosaic()
-             .write(`${filename}`, function (err) {
+             .write(`${filepath}`, function (err) {
               if (err) console.log(err);
               addColorChannelAndWriteToDisk(
-               filename,
+               filepath,
                artworksPath,
                compositeId
               );
@@ -95,10 +99,10 @@ powerbankDirectories.forEach((value) => {
              .in('-page', '+3827')
              .in(tiffFiles[2])
              .mosaic()
-             .write(`${filename}`, function (err) {
+             .write(`${filepath}`, function (err) {
               if (err) console.log(err);
               addColorChannelAndWriteToDisk(
-               filename,
+               filepath,
                artworksPath,
                compositeId
               );
@@ -116,10 +120,10 @@ powerbankDirectories.forEach((value) => {
              .in('-page', '+5740.5')
              .in(tiffFiles[3])
              .mosaic()
-             .write(`${filename}`, function (err) {
+             .write(`${filepath}`, function (err) {
               if (err) console.log(err);
               addColorChannelAndWriteToDisk(
-               filename,
+               filepath,
                artworksPath,
                compositeId
               );
@@ -139,10 +143,10 @@ powerbankDirectories.forEach((value) => {
              .in('-page', '+7654')
              .in(tiffFiles[4])
              .mosaic()
-             .write(`${filename}`, function (err) {
+             .write(`${filepath}`, function (err) {
               if (err) console.log(err);
               addColorChannelAndWriteToDisk(
-               filename,
+               filepath,
                artworksPath,
                compositeId
               );
@@ -164,10 +168,10 @@ powerbankDirectories.forEach((value) => {
              .in('-page', '+9567')
              .in(tiffFiles[5])
              .mosaic()
-             .write(`${filename}`, function (err) {
+             .write(`${filepath}`, function (err) {
               if (err) console.log(err);
               addColorChannelAndWriteToDisk(
-               filename,
+               filepath,
                artworksPath,
                compositeId
               );
@@ -185,22 +189,24 @@ powerbankDirectories.forEach((value) => {
  });
 });
 
-addColorChannelAndWriteToDisk = (filename, artworksPath, compositeId) => {
- fs.readFile(`${filename}`, function (err, file) {
+addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId) => {
+ console.log('filename: ' + JSON.stringify(filepath));
+ fs.readFile(`${filepath}`, function (err, file) {
   sharp(file)
    .ensureAlpha()
    .toColourspace('cmyk')
    .tiff({ compression: 'lzw' })
    .toFile(
-    `${artworksPath}/composite_${compositeId}-${filename}`,
+    `${artworksPath}/composite_${compositeId}-${filepath}`,
     (err, result) => {
      if (err) throw err;
-     console.log('filename saved in nas: ' + JSON.stringify(filename));
-     compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
-       console.log("response: " + JSON.stringify(response));
-     });
+     console.log('filename saved in nas: ' + JSON.stringify(compositeId));
+     //  compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
+     //    console.log("response: " + JSON.stringify(response));
+     //  });
     }
    );
   //settodownloadedbycomposite ID
+
  });
 };
