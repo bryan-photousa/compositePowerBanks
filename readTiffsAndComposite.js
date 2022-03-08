@@ -10,11 +10,11 @@ let powerbankDirectories = [
  'batch_downloaded_PowerBank_104'
 ];
 
-let twoUp = 1692.5;
-let threeUp = 3385;
-let fourUp = 5077.5;
-let fiveUp = 6770;
-let sixUp = 8462.5;
+let twoUp = 1966;
+let threeUp = 3932;
+let fourUp = 5898;
+let fiveUp = 7864;
+let sixUp = 9830;
 
 let homePath = `${__dirname}`;
 let regex = /[.]tiff$/;
@@ -83,6 +83,7 @@ init = () => {
            artworksPath,
            compositeId
           ) => {
+            console.log(filepath)
            switch (tiffFiles.length) {
             case 1:
              gm()
@@ -223,9 +224,9 @@ addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId) => {
     .tiff({ compression: 'lzw' })
     .toFile(`${artworksPath}/${compositeId}_${filepath}`, (err, result) => {
      if (err) throw err;
-      compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
-        console.log("response: " + JSON.stringify(response));
-      });
+      // compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
+      //   console.log("response: " + JSON.stringify(response));
+      // });
     });
    //settodownloadedbycomposite ID
   });
