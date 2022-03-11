@@ -217,6 +217,7 @@ init = () => {
 };
 
 addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId) => {
+  console.log('compositeID: '+ JSON.stringify(compositeId))
   fs.readFile(`${filepath}`, function (err, file) {
     sharp(file)
       .ensureAlpha()

@@ -12,10 +12,13 @@ const baseUrl = `${process.env.OPENPRINT_URL}`;
 
 changeCompositeToDownloaded = (compositeId) => {
  console.log('composite: ' + JSON.stringify(compositeId));
+ let id = {
+   composite_id: compositeId
+ }
  const config = {
   method: 'POST',
   headers,
-  data: compositeId
+  data: id
  };
  return axios(`${baseUrl}/change_composite_to_downloaded`, config)
   .then(responseSuccessHandler)
