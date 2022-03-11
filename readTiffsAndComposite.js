@@ -26,8 +26,6 @@ fs
 let nasPath = '/Volumes/nas/48/Zazzle/auto_print/openprint'; //current path for Mac //change to windows path in production
 let today = moment().format('YYYY-MM-DD');
 
-// init();
-
 init = () => {
   powerbankDirectories.forEach((value) => {
     let currReadDirectory;
@@ -226,9 +224,9 @@ addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId) => {
       .tiff({ compression: 'lzw' })
       .toFile(`${artworksPath}/${compositeId}_${filepath}`, (err, result) => {
         if (err) throw err;
-        // compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
-        //   console.log("response: " + JSON.stringify(response));
-        // });
+        compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
+          console.log("response: " + JSON.stringify(response));
+        });
       });
     //settodownloadedbycomposite ID
   });
