@@ -219,6 +219,7 @@ init = () => {
 };
 
 addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId) => {
+  console.log('compositeID: '+ JSON.stringify(compositeId))
   fs.readFile(`${filepath}`, function (err, file) {
     sharp(file)
       .ensureAlpha()
@@ -226,9 +227,9 @@ addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId) => {
       .tiff({ compression: 'lzw' })
       .toFile(`${artworksPath}/${compositeId}_${filepath}`, (err, result) => {
         if (err) throw err;
-        // compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
-        //   console.log("response: " + JSON.stringify(response));
-        // });
+        compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
+          console.log("response: " + JSON.stringify(response));
+        });
       });
     //settodownloadedbycomposite ID
   });
