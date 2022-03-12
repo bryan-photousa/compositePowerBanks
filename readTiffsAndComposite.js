@@ -4,6 +4,8 @@ const fs = require('fs'),
   moment = require('moment');
 const compositeService = require('./services/composite.services');
 const { inherits } = require('util');
+const fsExtra = require('fs-extra')
+
 
 let powerbankDirectories = [
   'batch_downloaded_PowerBank_103',
@@ -54,7 +56,6 @@ init = () => {
                     let quantity = tiffFiles.length
                     let promises = [];
                     let extension = '.tiff';
-                    console.log(tiffFiles)
                     tiffFiles.forEach((value, index) => {
                       let id = value.split('/')[10].split('_')[0];
                       if (index !== tiffFiles.length - 1) {
@@ -69,12 +70,11 @@ init = () => {
                       let filepath = '';
                       filepath = filename + extension;
                       let artworksPath = tiffFiles[0].replace('images', 'artworks');
-
                       artworksPath = artworksPath.split('/');
                       artworksPath = artworksPath
                         .filter((element, index) => index < artworksPath.length - 1)
                         .join('/');
-                      compositeImages(tiffFiles, filepath, artworksPath, compositeId);
+                      compositeImages(tiffFiles, filepath, artworksPath, compositeId, newArtworksPath);
                     });
 
                     compositeImages = (
@@ -95,7 +95,9 @@ init = () => {
                               addColorChannelAndWriteToDisk(
                                 filepath,
                                 artworksPath,
-                                compositeId
+                                compositeId,
+                                tiffFiles,
+                                newArtworksPath
                               );
                             });
                           break;
@@ -111,7 +113,10 @@ init = () => {
                               addColorChannelAndWriteToDisk(
                                 filepath,
                                 artworksPath,
-                                compositeId
+                                compositeId,
+                                tiffFiles,
+                                newArtworksPath
+
                               );
                             });
                           break;
@@ -130,7 +135,10 @@ init = () => {
                               addColorChannelAndWriteToDisk(
                                 filepath,
                                 artworksPath,
-                                compositeId
+                                compositeId,
+                                tiffFiles,
+                                newArtworksPath
+
                               );
                             });
                           break;
@@ -151,7 +159,10 @@ init = () => {
                               addColorChannelAndWriteToDisk(
                                 filepath,
                                 artworksPath,
-                                compositeId
+                                compositeId,
+                                tiffFiles,
+                                newArtworksPath
+
                               );
                             });
                           break;
@@ -174,7 +185,10 @@ init = () => {
                               addColorChannelAndWriteToDisk(
                                 filepath,
                                 artworksPath,
-                                compositeId
+                                compositeId,
+                                tiffFiles,
+                                newArtworksPath
+
                               );
                             });
                           break;
@@ -199,7 +213,10 @@ init = () => {
                               addColorChannelAndWriteToDisk(
                                 filepath,
                                 artworksPath,
-                                compositeId
+                                compositeId,
+                                tiffFiles,
+                                newArtworksPath
+
                               );
                             });
                           break;
@@ -216,8 +233,9 @@ init = () => {
   });
 };
 
-addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId) => {
-  console.log('compositeID: '+ JSON.stringify(compositeId))
+addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles, newArtworksPath) => {
+  let newFilesPath = ''
+  console.log({ filepath, artworksPath })
   fs.readFile(`${filepath}`, function (err, file) {
     sharp(file)
       .ensureAlpha()
@@ -225,9 +243,27 @@ addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId) => {
       .tiff({ compression: 'lzw' })
       .toFile(`${artworksPath}/${compositeId}_${filepath}`, (err, result) => {
         if (err) throw err;
-        compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
-          console.log("response: " + JSON.stringify(response));
-        });
+        let newPath
+        tiffFiles.forEach(file => {
+
+          newPath = file.replaceAll('downloaded', 'printed')
+          let splitNewPath = newPath.split('/')
+          splitNewPath.pop()
+
+          joinedNewPath = splitNewPath.join('/')
+          if (!fstat.existsSync(joinedNewPath, { recursive: true })) {
+            fs.mkdirSync(joinedNewPath)
+          }
+          fsExtra.move(file, newPath, (err) => {
+            if (err) {
+              throw err
+            }
+          })
+        })
+
+        // compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
+        //   console.log("response: " + JSON.stringify(response));
+        // });
       });
     //settodownloadedbycomposite ID
   });
