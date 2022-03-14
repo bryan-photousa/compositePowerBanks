@@ -11,7 +11,6 @@ const headers = {
 const baseUrl = `${process.env.OPENPRINT_URL}`;
 
 changeCompositeToDownloaded = (compositeId) => {
- console.log('composite: ' + JSON.stringify(compositeId));
  let id = {
    composite_id: compositeId
  }

@@ -74,7 +74,7 @@ init = () => {
                       artworksPath = artworksPath
                         .filter((element, index) => index < artworksPath.length - 1)
                         .join('/');
-                      compositeImages(tiffFiles, filepath, artworksPath, compositeId, newArtworksPath);
+                      compositeImages(tiffFiles, filepath, artworksPath, compositeId);
                     });
 
                     compositeImages = (
@@ -96,8 +96,7 @@ init = () => {
                                 filepath,
                                 artworksPath,
                                 compositeId,
-                                tiffFiles,
-                                newArtworksPath
+                                tiffFiles
                               );
                             });
                           break;
@@ -114,8 +113,7 @@ init = () => {
                                 filepath,
                                 artworksPath,
                                 compositeId,
-                                tiffFiles,
-                                newArtworksPath
+                                tiffFiles
 
                               );
                             });
@@ -136,9 +134,7 @@ init = () => {
                                 filepath,
                                 artworksPath,
                                 compositeId,
-                                tiffFiles,
-                                newArtworksPath
-
+                                tiffFiles
                               );
                             });
                           break;
@@ -160,8 +156,7 @@ init = () => {
                                 filepath,
                                 artworksPath,
                                 compositeId,
-                                tiffFiles,
-                                newArtworksPath
+                                tiffFiles
 
                               );
                             });
@@ -186,8 +181,7 @@ init = () => {
                                 filepath,
                                 artworksPath,
                                 compositeId,
-                                tiffFiles,
-                                newArtworksPath
+                                tiffFiles
 
                               );
                             });
@@ -214,8 +208,7 @@ init = () => {
                                 filepath,
                                 artworksPath,
                                 compositeId,
-                                tiffFiles,
-                                newArtworksPath
+                                tiffFiles
 
                               );
                             });
@@ -233,7 +226,7 @@ init = () => {
   });
 };
 
-addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles, newArtworksPath) => {
+addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles) => {
   let newFilesPath = ''
   console.log({ filepath, artworksPath })
   fs.readFile(`${filepath}`, function (err, file) {
@@ -260,10 +253,9 @@ addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles,
             }
           })
         })
-
-        // compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
-        //   console.log("response: " + JSON.stringify(response));
-        // });
+        compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
+          console.log("response: " + JSON.stringify(response));
+        });
       });
     //settodownloadedbycomposite ID
   });
