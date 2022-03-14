@@ -157,7 +157,6 @@ init = () => {
                                 artworksPath,
                                 compositeId,
                                 tiffFiles
-
                               );
                             });
                           break;
@@ -182,7 +181,6 @@ init = () => {
                                 artworksPath,
                                 compositeId,
                                 tiffFiles
-
                               );
                             });
                           break;
@@ -209,7 +207,6 @@ init = () => {
                                 artworksPath,
                                 compositeId,
                                 tiffFiles
-
                               );
                             });
                           break;
@@ -243,9 +240,9 @@ addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles)
           let splitNewPath = newPath.split('/')
           splitNewPath.pop()
 
-          joinedNewPath = splitNewPath.join('/')
-          if (!fstat.existsSync(joinedNewPath, { recursive: true })) {
-            fs.mkdirSync(joinedNewPath)
+          let joinedNewPath = splitNewPath.join('/')
+          if (!fs.existsSync(joinedNewPath)) {
+            fs.mkdirSync(joinedNewPath,{ recursive: true })
           }
           fsExtra.move(file, newPath, (err) => {
             if (err) {
