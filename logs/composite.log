@@ -1,29 +1,97 @@
-1898372_1898374_1898375_M104PD-BLK_3.tiff
-1898377_1898378_1898379_M103PD-BLK_3.tiff
 {
-  filepath: '1898372_1898374_1898375_M104PD-BLK_3.tiff',
-  artworksPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_873875-2022-03-14/artworks_873875-2022-03-14'
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_104/batch_printed_873875-2022-03-14/images_873875-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_873875-2022-03-14/images_873875-2022-03-14/1898372_M104PD-BLK.tiff'
 }
 {
-  filepath: '1898377_1898378_1898379_M103PD-BLK_3.tiff',
-  artworksPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-14/artworks_873874-2022-03-14'
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_104/batch_printed_873875-2022-03-14/images_873875-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_873875-2022-03-14/images_873875-2022-03-14/1898374_M104PD-BLK.tiff'
 }
-/Users/itadmin/Documents/Code/compositePowerBanks/readTiffsAndComposite.js:242
-          newPath = file.replaceAll('downloaded', 'printed')
-                         ^
-
-TypeError: file.replaceAll is not a function
-    at /Users/itadmin/Documents/Code/compositePowerBanks/readTiffsAndComposite.js:242:26
-    at Array.forEach (<anonymous>)
-    at Object.<anonymous> (/Users/itadmin/Documents/Code/compositePowerBanks/readTiffsAndComposite.js:240:19)
-/Users/itadmin/Documents/Code/compositePowerBanks/readTiffsAndComposite.js:137
-<<<<<<< HEAD
-^^
-
-SyntaxError: Unexpected token '<<'
-    at Module._compile (internal/modules/cjs/loader.js:892:18)
-    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)
-    at Module.load (internal/modules/cjs/loader.js:812:32)
-    at Function.Module._load (internal/modules/cjs/loader.js:724:14)
-    at Function.Module.runMain (internal/modules/cjs/loader.js:1025:10)
-    at internal/main/run_main_module.js:17:11
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_104/batch_printed_873875-2022-03-14/images_873875-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_873875-2022-03-14/images_873875-2022-03-14/1898375_M104PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_873874-2022-03-14/images_873874-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-14/images_873874-2022-03-14/1898377_M103PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_873874-2022-03-14/images_873874-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-14/images_873874-2022-03-14/1898378_M103PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_873874-2022-03-14/images_873874-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-14/images_873874-2022-03-14/1898379_M103PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_104/batch_printed_873875-2022-03-14/images_873875-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_873875-2022-03-14/images_873875-2022-03-14/1898372_M104PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_104/batch_printed_873875-2022-03-14/images_873875-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_873875-2022-03-14/images_873875-2022-03-14/1898374_M104PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_104/batch_printed_873875-2022-03-14/images_873875-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_873875-2022-03-14/images_873875-2022-03-14/1898375_M104PD-BLK.tiff'
+}
+(node:33320) UnhandledPromiseRejectionWarning: Error: dest already exists.
+    at /Users/itadmin/Documents/Code/compositePowerBanks/node_modules/fs-extra/lib/move/move.js:49:31
+    at /Users/itadmin/Documents/Code/compositePowerBanks/node_modules/universalify/index.js:22:54
+(node:33320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
+(node:33320) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:33320) UnhandledPromiseRejectionWarning: Error: dest already exists.
+    at /Users/itadmin/Documents/Code/compositePowerBanks/node_modules/fs-extra/lib/move/move.js:49:31
+    at /Users/itadmin/Documents/Code/compositePowerBanks/node_modules/universalify/index.js:22:54
+(node:33320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
+(node:33320) UnhandledPromiseRejectionWarning: Error: dest already exists.
+    at /Users/itadmin/Documents/Code/compositePowerBanks/node_modules/fs-extra/lib/move/move.js:49:31
+    at /Users/itadmin/Documents/Code/compositePowerBanks/node_modules/universalify/index.js:22:54
+(node:33320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 3)
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_873874-2022-03-14/images_873874-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-14/images_873874-2022-03-14/1898377_M103PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_873874-2022-03-14/images_873874-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-14/images_873874-2022-03-14/1898378_M103PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_873874-2022-03-14/images_873874-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-14/images_873874-2022-03-14/1898379_M103PD-BLK.tiff'
+}
+(node:33320) UnhandledPromiseRejectionWarning: Error: dest already exists.
+    at /Users/itadmin/Documents/Code/compositePowerBanks/node_modules/fs-extra/lib/move/move.js:49:31
+    at /Users/itadmin/Documents/Code/compositePowerBanks/node_modules/universalify/index.js:22:54
+(node:33320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 4)
+(node:33320) UnhandledPromiseRejectionWarning: Error: dest already exists.
+    at /Users/itadmin/Documents/Code/compositePowerBanks/node_modules/fs-extra/lib/move/move.js:49:31
+    at /Users/itadmin/Documents/Code/compositePowerBanks/node_modules/universalify/index.js:22:54
+(node:33320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 5)
+(node:33320) UnhandledPromiseRejectionWarning: Error: dest already exists.
+    at /Users/itadmin/Documents/Code/compositePowerBanks/node_modules/fs-extra/lib/move/move.js:49:31
+    at /Users/itadmin/Documents/Code/compositePowerBanks/node_modules/universalify/index.js:22:54
+(node:33320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 6)
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_104/batch_printed_873875-2022-03-14/images_873875-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_873875-2022-03-14/images_873875-2022-03-14/1898372_M104PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_104/batch_printed_873875-2022-03-14/images_873875-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_873875-2022-03-14/images_873875-2022-03-14/1898374_M104PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_104/batch_printed_873875-2022-03-14/images_873875-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_873875-2022-03-14/images_873875-2022-03-14/1898375_M104PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_873874-2022-03-14/images_873874-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-14/images_873874-2022-03-14/1898377_M103PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_873874-2022-03-14/images_873874-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-14/images_873874-2022-03-14/1898378_M103PD-BLK.tiff'
+}
+{
+  joinedNewPath: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_873874-2022-03-14/images_873874-2022-03-14',
+  file: '/Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-14/images_873874-2022-03-14/1898379_M103PD-BLK.tiff'
+}

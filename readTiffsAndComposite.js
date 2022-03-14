@@ -56,25 +56,31 @@ init = () => {
                     let quantity = tiffFiles.length
                     let promises = [];
                     let extension = '.tiff';
-                    tiffFiles.forEach((value, index) => {
-                      let id = value.split('/')[10].split('_')[0];
-                      if (index !== tiffFiles.length - 1) {
-                        filename += id + '_';
-                      } else {
-                        filename +=
-                          id + '_' + value.split('/')[10].split('_')[1].split('.')[0] + "_" + quantity;
-                      }
-                      promises.push(index);
-                    });
+                    if (tiffFiles.length > 0) {
+                      tiffFiles.forEach((value, index) => {
+                        let id = value.split('/')[10].split('_')[0];
+                        if (index !== tiffFiles.length - 1) {
+                          filename += id + '_';
+                        } else {
+                          filename +=
+                            id + '_' + value.split('/')[10].split('_')[1].split('.')[0] + "_" + quantity;
+                        }
+                        promises.push(index);
+                      });
+                    }
                     Promise.all(promises).then(() => {
                       let filepath = '';
                       filepath = filename + extension;
-                      let artworksPath = tiffFiles[0].replace('images', 'artworks');
-                      artworksPath = artworksPath.split('/');
-                      artworksPath = artworksPath
-                        .filter((element, index) => index < artworksPath.length - 1)
-                        .join('/');
-                      compositeImages(tiffFiles, filepath, artworksPath, compositeId);
+                      if (tiffFiles.length > 0) {
+                        let artworksPath = tiffFiles[0].replace('images', 'artworks');
+                        artworksPath = artworksPath.split('/');
+                        artworksPath = artworksPath
+                          .filter((element, index) => index < artworksPath.length - 1)
+                          .join('/');
+                        compositeImages(tiffFiles, filepath, artworksPath, compositeId);
+                      }
+
+
                     });
 
                     compositeImages = (
@@ -83,7 +89,6 @@ init = () => {
                       artworksPath,
                       compositeId
                     ) => {
-                      console.log(filepath)
                       switch (tiffFiles.length) {
                         case 1:
                           gm()
@@ -225,36 +230,39 @@ init = () => {
 
 addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles) => {
   let newFilesPath = ''
-  console.log({ filepath, artworksPath })
   fs.readFile(`${filepath}`, function (err, file) {
-    sharp(file)
+    sharp(file).withMetadata({ density: 300 })
       .ensureAlpha()
       .toColourspace('cmyk')
       .tiff({ compression: 'lzw' })
       .toFile(`${artworksPath}/${compositeId}_${filepath}`, (err, result) => {
         if (err) throw err;
-        let newPath
+        let newPath = ''
         tiffFiles.forEach(file => {
-
-          newPath = file.replaceAll('downloaded', 'printed')
+          let find = "downloaded"
+          let re = new RegExp(find, 'g')
+          newPath = file.replace(re, 'printed')
           let splitNewPath = newPath.split('/')
           splitNewPath.pop()
 
           let joinedNewPath = splitNewPath.join('/')
+          console.log({ joinedNewPath, file })
           if (!fs.existsSync(joinedNewPath)) {
-            fs.mkdirSync(joinedNewPath,{ recursive: true })
+            fs.mkdirSync(joinedNewPath, { recursive: true })
+
+
           }
           fsExtra.move(file, newPath, (err) => {
             if (err) {
               throw err
             }
           })
+
         })
-        compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
-          console.log("response: " + JSON.stringify(response));
-        });
+        // compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
+        //   console.log("response: " + JSON.stringify(response));
+        // });
       });
-    //settodownloadedbycomposite ID
   });
 };
 
