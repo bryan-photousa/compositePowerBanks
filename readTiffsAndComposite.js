@@ -13,11 +13,15 @@ let powerbankDirectories = [
   'batch_downloaded_PowerBank_104'
 ];
 
-let twoUp = 1974;
-let threeUp = twoUp * 2;
-let fourUp = twoUp * 3;
-let fiveUp = twoUp * 4;
-let sixUp = twoUp * 5;
+
+let y = 0
+let x = 0
+
+let twoUpX = 1966;
+let threeUpX = 3932;
+let fourUpX = 5898;
+let fiveUpX = 7864;
+let sixUpX = 9830;
 
 let homePath = `${__dirname}`;
 let regex = /[.]tiff$/;
@@ -110,7 +114,7 @@ init = () => {
                         switch (tiffFiles.length) {
                           case 1:
                             gm()
-                              .in('-page', '+0+0')
+                              .in('-page', `+${x}+${y}`)
                               .in(tiffFiles[0])
                               .mosaic()
                               .write(`${filepath}`, function (err) {
@@ -126,9 +130,9 @@ init = () => {
                             break;
                           case 2:
                             gm()
-                              .in('-page', '+0+0')
+                              .in('-page', `+${x}+${y}`)
                               .in(tiffFiles[0])
-                              .in('-page', `+${twoUp}`)
+                              .in('-page', `+${twoUpX}+${y}`)
                               .in(tiffFiles[1])
                               .mosaic()
                               .write(`${filepath}`, function (err) {
@@ -146,11 +150,11 @@ init = () => {
 
                           case 3:
                             gm()
-                              .in('-page', '+0+0')
+                              .in('-page', `+${x}+${y}`)
                               .in(tiffFiles[0])
-                              .in('-page', `+${twoUp}`)
+                              .in('-page', `+${twoUpX}+${y}`)
                               .in(tiffFiles[1])
-                              .in('-page', `+${threeUp}`)
+                              .in('-page', `+${threeUpX}+${y}`)
                               .in(tiffFiles[2])
                               .mosaic()
                               .write(`${filepath}`, function (err) {
@@ -167,13 +171,13 @@ init = () => {
 
                           case 4:
                             gm()
-                              .in('-page', '+0+0')
+                              .in('-page', `+${x}+${y}`)
                               .in(tiffFiles[0])
-                              .in('-page', `+${twoUp}`)
+                              .in('-page', `+${twoUpX}+${y}`)
                               .in(tiffFiles[1])
-                              .in('-page', `+${threeUp}`)
+                              .in('-page', `+${threeUpX}+${y}`)
                               .in(tiffFiles[2])
-                              .in('-page', `+${fourUp}`)
+                              .in('-page', `+${fourUpX}+${y}`)
                               .in(tiffFiles[3])
                               .mosaic()
                               .write(`${filepath}`, function (err) {
@@ -190,15 +194,15 @@ init = () => {
 
                           case 5:
                             gm()
-                              .in('-page', '+0+0')
+                              .in('-page',`+${x}+${y}`)
                               .in(tiffFiles[0])
-                              .in('-page', `+${twoUp}`)
+                              .in('-page', `+${twoUpX}+${y}`)
                               .in(tiffFiles[1])
-                              .in('-page', `+${threeUp}`)
+                              .in('-page', `+${threeUpX}+${y}`)
                               .in(tiffFiles[2])
-                              .in('-page', `+${fourUp}`)
+                              .in('-page', `+${fourUpX}+${y}`)
                               .in(tiffFiles[3])
-                              .in('-page', `+${fiveUp}`)
+                              .in('-page', `+${fiveUpX}+${y}`)
                               .in(tiffFiles[4])
                               .mosaic()
                               .write(`${filepath}`, function (err) {
@@ -215,17 +219,17 @@ init = () => {
 
                           case 6:
                             gm()
-                              .in('-page', '+0+0')
+                              .in('-page', `+${x}+${y}`)
                               .in(tiffFiles[0])
-                              .in('-page', `+${twoUp}`)
+                              .in('-page', `+${twoUpX}+${y}`)
                               .in(tiffFiles[1])
-                              .in('-page', `+${threeUp}`)
+                              .in('-page', `+${threeUpX}+${y}`)
                               .in(tiffFiles[2])
-                              .in('-page', `+${fourUp}`)
+                              .in('-page', `+${fourUpX}+${y}`)
                               .in(tiffFiles[3])
-                              .in('-page', `+${fiveUp}`)
+                              .in('-page', `+${fiveUpX}+${y}`)
                               .in(tiffFiles[4])
-                              .in('-page', `+${sixUp}`)
+                              .in('-page', `+${sixUpX}+${y}`)
                               .in(tiffFiles[5])
                               .mosaic()
                               .write(`${filepath}`, function (err) {
@@ -286,6 +290,7 @@ addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles)
             if (err) {
               throw err
             }
+            logger.info(`${file} moved to ${newPath}`)
           })
 
         })
