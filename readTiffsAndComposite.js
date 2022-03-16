@@ -5,6 +5,7 @@ const fs = require('fs'),
 const compositeService = require('./services/composite.services');
 const fsExtra = require('fs-extra')
 const logger = require('./utilities/logger');
+const cron = require('node-cron')
 
 
 
@@ -52,13 +53,13 @@ init = () => {
             orderDirectory = currReadDirectory + '/' + dir.name;
             let imageDirectory;
             fs.readdir(orderDirectory, { withFileTypes: true }, (err, subdirs1) => {
-              let opOrderId
+              let opOrderIds
               let artworksPath
               subdirs1.forEach((dir1) => {
                 logger.info('SEARCHING FOR ' + JSON.stringify(value.split("_")[3]) + " IN " + JSON.stringify(dir1.name))
                 let compositeId;
                 if (dir1.name.includes("artworks")) {
-                  opOrderId = dir1.name.split("_")[1]
+                  opOrderIds = dir1.name.split("_")[1]
                   artworksPath = orderDirectory + "/" + dir1.name
 
                 }
@@ -91,7 +92,7 @@ init = () => {
                         let filepath = '';
                         filepath = filename + extension;
                         if (tiffFiles.length > 0) {                      
-                          compositeImages(tiffFiles, filepath, artworksPath, compositeId, opOrderId);
+                          compositeImages(tiffFiles, filepath, artworksPath, compositeId, opOrderIds);
                         }
                       }).catch(err => {
                         if (err) {
@@ -105,7 +106,7 @@ init = () => {
                         filepath,
                         artworksPath,
                         compositeId,
-                        opOrderId
+                        opOrderIds
 
                       ) => {
                         logger.info("INITIALIZING COMPOSITE FOR " + JSON.stringify(tiffFiles.length) + " TIFF FILES.")
@@ -125,7 +126,7 @@ init = () => {
                                   artworksPath,
                                   compositeId,
                                   tiffFiles,
-                                  opOrderId
+                                  opOrderIds
                                 );
                               });
                             break;
@@ -146,7 +147,7 @@ init = () => {
                                   artworksPath,
                                   compositeId,
                                   tiffFiles,
-                                  opOrderId
+                                  opOrderIds
 
                                 );
                               });
@@ -172,7 +173,7 @@ init = () => {
                                   artworksPath,
                                   compositeId,
                                   tiffFiles,
-                                  opOrderId
+                                  opOrderIds
                                 );
                               });
                             break;
@@ -198,7 +199,7 @@ init = () => {
                                   artworksPath,
                                   compositeId,
                                   tiffFiles,
-                                  opOrderId
+                                  opOrderIds
                                 );
                               });
                             break;
@@ -225,7 +226,7 @@ init = () => {
                                   artworksPath,
                                   compositeId,
                                   tiffFiles,
-                                  opOrderId
+                                  opOrderIds
                                 );
                               });
                             break;
@@ -255,7 +256,7 @@ init = () => {
                                   artworksPath,
                                   compositeId,
                                   tiffFiles,
-                                  opOrderId
+                                  opOrderIds
                                 );
                               });
                             break;
@@ -281,14 +282,15 @@ init = () => {
 
 };
 
-addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles, opOrderId) => {
+addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles, opOrderIds) => {
+  console.log('oporderides: ' +JSON.stringify(opOrderIds))
   logger.info("ADDING CMYK CHANNEL TO COMPOSITE")
   fs.readFile(`${filepath}`, function (err, file) {
     sharp(file).withMetadata({ density: 300 })
       .ensureAlpha()
       .toColourspace('cmyk')
       .tiff({ compression: 'lzw' })
-      .toFile(`${artworksPath}/${opOrderId}_${compositeId}_${filepath}`, (err, result) => {
+      .toFile(`${artworksPath}/${opOrderIds}_${compositeId}_${filepath}`, (err, result) => {
         logger.info("CMYK CHANNEL ADDED TO COMPOSITE @ 300 DPI " + `${artworksPath}/${compositeId}_${filepath}`)
         if (err) throw err;
         let newPath = ''
@@ -321,4 +323,13 @@ addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles,
   });
 };
 
-init()
+
+cron.schedule('40 7 * * *', function(){
+  logger.info('CRONJOB INITIALIZED')
+  init()
+})
+
+cron.schedule('40 12 * * *', function(){
+  logger.info('CRONJOB INITIALIZED')
+  init()
+})
