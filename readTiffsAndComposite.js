@@ -282,7 +282,6 @@ init = () => {
 };
 
 addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles, opOrderId) => {
-  console.log(`${artworksPath}/${opOrderId}_${compositeId}_${filepath}`)
   logger.info("ADDING CMYK CHANNEL TO COMPOSITE")
   fs.readFile(`${filepath}`, function (err, file) {
     sharp(file).withMetadata({ density: 300 })

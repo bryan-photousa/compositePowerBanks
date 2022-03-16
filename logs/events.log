@@ -511,3 +511,46 @@
 2022-03-16 10:26:06.794 INFO  /Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-16/images_873874-2022-03-16/1898377_M103PD-BLK.tiff moved to /Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_873874-2022-03-16/images_873874-2022-03-16/1898379_M103PD-BLK.tiff 
 2022-03-16 10:26:06.795 INFO  /Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-16/images_873874-2022-03-16/1898378_M103PD-BLK.tiff moved to /Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_873874-2022-03-16/images_873874-2022-03-16/1898379_M103PD-BLK.tiff 
 2022-03-16 10:26:06.825 INFO  /Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_873874-2022-03-16/images_873874-2022-03-16/1898379_M103PD-BLK.tiff moved to /Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_873874-2022-03-16/images_873874-2022-03-16/1898379_M103PD-BLK.tiff 
+2022-03-16 12:01:37.468 INFO  :::READ TIFFS AND COMPOSITE INITIALIZED::: 
+2022-03-16 12:01:37.582 INFO  SEARCHING FOR "104" IN ".DS_Store" 
+2022-03-16 12:01:37.582 INFO  SEARCHING FOR "104" IN "batch_downloaded_1-2022-03-16" 
+2022-03-16 12:01:37.582 INFO  SEARCHING FOR "104" IN "batch_downloaded_873875-2022-03-15" 
+2022-03-16 12:01:37.583 INFO  SEARCHING FOR "103" IN ".DS_Store" 
+2022-03-16 12:01:37.583 INFO  SEARCHING FOR "103" IN "batch_downloaded_1-2022-03-16" 
+2022-03-16 12:01:37.583 INFO  SEARCHING FOR "103" IN "batch_downloaded_873874-2022-03-15" 
+2022-03-16 12:01:37.586 INFO  SEARCHING FOR "104" IN ".DS_Store" 
+2022-03-16 12:01:37.586 INFO  SEARCHING FOR "104" IN "artworks_1186697_1-2022-03-16" 
+2022-03-16 12:01:37.586 INFO  SEARCHING FOR "104" IN "barcodes_1-2022-03-16" 
+2022-03-16 12:01:37.586 INFO  SEARCHING FOR "104" IN "images_1-2022-03-16" 
+2022-03-16 12:01:37.587 INFO  SEARCHING FOR "103" IN "images_1-2022-03-16" 
+2022-03-16 12:01:37.590 INFO  INITIALIZING COMPOSITE FOR 3 TIFF FILES. 
+2022-03-16 12:01:37.596 INFO  INITIALIZING COMPOSITE FOR 3 TIFF FILES. 
+2022-03-16 12:01:38.049 INFO  COMPOSITING COMPLETED. 
+2022-03-16 12:01:38.049 INFO  ADDING CMYK CHANNEL TO COMPOSITE 
+2022-03-16 12:01:38.173 INFO  COMPOSITING COMPLETED. 
+2022-03-16 12:01:38.173 INFO  ADDING CMYK CHANNEL TO COMPOSITE 
+2022-03-16 12:32:02.630 INFO  :::READ TIFFS AND COMPOSITE INITIALIZED::: 
+2022-03-16 12:32:02.638 INFO  SEARCHING FOR "104" IN ".DS_Store" 
+2022-03-16 12:32:02.638 INFO  SEARCHING FOR "104" IN "batch_downloaded_2-2022-03-16" 
+2022-03-16 12:32:02.639 INFO  SEARCHING FOR "103" IN ".DS_Store" 
+2022-03-16 12:32:02.639 INFO  SEARCHING FOR "103" IN "batch_downloaded_1-2022-03-16" 
+2022-03-16 12:32:02.642 INFO  SEARCHING FOR "104" IN "artworks_1186697_2-2022-03-16" 
+2022-03-16 12:32:02.642 INFO  SEARCHING FOR "104" IN "barcodes_2-2022-03-16" 
+2022-03-16 12:32:02.642 INFO  SEARCHING FOR "104" IN "images_2-2022-03-16" 
+2022-03-16 12:32:02.642 INFO  SEARCHING FOR "103" IN "artworks_1186697_1-2022-03-16" 
+2022-03-16 12:32:02.642 INFO  SEARCHING FOR "103" IN "barcodes_1-2022-03-16" 
+2022-03-16 12:32:02.642 INFO  SEARCHING FOR "103" IN "images_1-2022-03-16" 
+2022-03-16 12:32:02.645 INFO  INITIALIZING COMPOSITE FOR 3 TIFF FILES. 
+2022-03-16 12:32:02.651 INFO  INITIALIZING COMPOSITE FOR 3 TIFF FILES. 
+2022-03-16 12:32:02.984 INFO  COMPOSITING COMPLETED. 
+2022-03-16 12:32:02.984 INFO  ADDING CMYK CHANNEL TO COMPOSITE 
+2022-03-16 12:32:03.043 INFO  COMPOSITING COMPLETED. 
+2022-03-16 12:32:03.043 INFO  ADDING CMYK CHANNEL TO COMPOSITE 
+2022-03-16 12:32:03.407 INFO  CMYK CHANNEL ADDED TO COMPOSITE @ 300 DPI /Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_2-2022-03-16/artworks_1186697_2-2022-03-16/2_1231_1238_4323_M104PD-BLK_3.tiff 
+2022-03-16 12:32:03.443 INFO  /Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_2-2022-03-16/images_2-2022-03-16/1231_M104PD-BLK.tiff moved to /Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_104/batch_printed_2-2022-03-16/images_2-2022-03-16/4323_M104PD-BLK.tiff 
+2022-03-16 12:32:03.450 INFO  CMYK CHANNEL ADDED TO COMPOSITE @ 300 DPI /Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_1-2022-03-16/artworks_1186697_1-2022-03-16/1_11111_3222_4323_M103PD-BLK_3.tiff 
+2022-03-16 12:32:03.462 INFO  /Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_2-2022-03-16/images_2-2022-03-16/1238_M104PD-BLK.tiff moved to /Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_104/batch_printed_2-2022-03-16/images_2-2022-03-16/4323_M104PD-BLK.tiff 
+2022-03-16 12:32:03.462 INFO  /Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_104/batch_downloaded_2-2022-03-16/images_2-2022-03-16/4323_M104PD-BLK.tiff moved to /Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_104/batch_printed_2-2022-03-16/images_2-2022-03-16/4323_M104PD-BLK.tiff 
+2022-03-16 12:32:03.488 INFO  /Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_1-2022-03-16/images_1-2022-03-16/11111_M103PD-BLK.tiff moved to /Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_1-2022-03-16/images_1-2022-03-16/4323_M103PD-BLK.tiff 
+2022-03-16 12:32:03.510 INFO  /Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_1-2022-03-16/images_1-2022-03-16/4323_M103PD-BLK.tiff moved to /Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_1-2022-03-16/images_1-2022-03-16/4323_M103PD-BLK.tiff 
+2022-03-16 12:32:03.511 INFO  /Volumes/nas/48/Zazzle/auto_print/openprint/batch_downloaded_PowerBank_103/batch_downloaded_1-2022-03-16/images_1-2022-03-16/3222_M103PD-BLK.tiff moved to /Volumes/nas/48/Zazzle/auto_print/openprint/batch_printed_PowerBank_103/batch_printed_1-2022-03-16/images_1-2022-03-16/4323_M103PD-BLK.tiff 
