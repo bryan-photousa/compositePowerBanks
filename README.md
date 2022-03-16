@@ -1,9 +1,9 @@
 # compositePowerBanksAndSetToDownloaded
 
 
-dependencies: 
+dependencies
 
-install with homebrew
+install with homebrew:
 
 graphicksmagic
 imagemagick

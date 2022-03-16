@@ -51,16 +51,20 @@ init = () => {
           if (dir.isDirectory() && dir.name.includes(today)) {
             orderDirectory = currReadDirectory + '/' + dir.name;
             let imageDirectory;
-            console.log("INSIDE" + JSON.stringify(orderDirectory))
             fs.readdir(orderDirectory, { withFileTypes: true }, (err, subdirs1) => {
-
+              let opOrderId
+              let artworksPath
               subdirs1.forEach((dir1) => {
                 logger.info('SEARCHING FOR ' + JSON.stringify(value.split("_")[3]) + " IN " + JSON.stringify(dir1.name))
-
                 let compositeId;
+                if (dir1.name.includes("artworks")) {
+                  opOrderId = dir1.name.split("_")[1]
+                  artworksPath = orderDirectory + "/" + dir1.name
 
+                }
                 if (dir1.name.includes('images')) {
                   imageDirectory = orderDirectory + '/' + dir1.name;
+
                   compositeId = dir1.name.split('_')[1].split('-')[0];
                   fs.readdir(imageDirectory, { withFileTypes: true }, (err, files) => {
                     files.forEach((file) => {
@@ -84,19 +88,11 @@ init = () => {
                         });
                       }
                       Promise.all(promises).then(() => {
-
                         let filepath = '';
                         filepath = filename + extension;
-                        if (tiffFiles.length > 0) {
-                          let artworksPath = tiffFiles[0].replace('images', 'artworks');
-                          artworksPath = artworksPath.split('/');
-                          artworksPath = artworksPath
-                            .filter((element, index) => index < artworksPath.length - 1)
-                            .join('/');
-                          compositeImages(tiffFiles, filepath, artworksPath, compositeId);
+                        if (tiffFiles.length > 0) {                      
+                          compositeImages(tiffFiles, filepath, artworksPath, compositeId, opOrderId);
                         }
-
-
                       }).catch(err => {
                         if (err) {
                           logger.info('')
@@ -108,7 +104,9 @@ init = () => {
                         tiffFiles,
                         filepath,
                         artworksPath,
-                        compositeId
+                        compositeId,
+                        opOrderId
+
                       ) => {
                         logger.info("INITIALIZING COMPOSITE FOR " + JSON.stringify(tiffFiles.length) + " TIFF FILES.")
                         switch (tiffFiles.length) {
@@ -118,13 +116,16 @@ init = () => {
                               .in(tiffFiles[0])
                               .mosaic()
                               .write(`${filepath}`, function (err) {
+                                if (err) {
+                                  logger.warn("ERROR WRITING COMPOSITE TIFF " + JSON.stringify(filepath))
+                                }
                                 logger.info('COMPOSITING COMPLETED.')
-                                if (err) console.log(err);
                                 addColorChannelAndWriteToDisk(
                                   filepath,
                                   artworksPath,
                                   compositeId,
-                                  tiffFiles
+                                  tiffFiles,
+                                  opOrderId
                                 );
                               });
                             break;
@@ -136,13 +137,16 @@ init = () => {
                               .in(tiffFiles[1])
                               .mosaic()
                               .write(`${filepath}`, function (err) {
+                                if (err) {
+                                  logger.warn("ERROR WRITING COMPOSITE TIFF " + JSON.stringify(filepath))
+                                }
                                 logger.info('COMPOSITING COMPLETED.')
-                                if (err) console.log(err);
                                 addColorChannelAndWriteToDisk(
                                   filepath,
                                   artworksPath,
                                   compositeId,
-                                  tiffFiles
+                                  tiffFiles,
+                                  opOrderId
 
                                 );
                               });
@@ -158,13 +162,17 @@ init = () => {
                               .in(tiffFiles[2])
                               .mosaic()
                               .write(`${filepath}`, function (err) {
+                                if (err) {
+                                  logger.warn("ERROR WRITING COMPOSITE TIFF " + JSON.stringify(filepath))
+                                }
                                 logger.info('COMPOSITING COMPLETED.')
-                                if (err) console.log(err);
+
                                 addColorChannelAndWriteToDisk(
                                   filepath,
                                   artworksPath,
                                   compositeId,
-                                  tiffFiles
+                                  tiffFiles,
+                                  opOrderId
                                 );
                               });
                             break;
@@ -181,20 +189,22 @@ init = () => {
                               .in(tiffFiles[3])
                               .mosaic()
                               .write(`${filepath}`, function (err) {
+                                if (err) {
+                                  logger.warn("ERROR WRITING COMPOSITE TIFF " + JSON.stringify(filepath))
+                                }
                                 logger.info('COMPOSITING COMPLETED.')
-                                if (err) console.log(err);
                                 addColorChannelAndWriteToDisk(
                                   filepath,
                                   artworksPath,
                                   compositeId,
-                                  tiffFiles
+                                  tiffFiles,
+                                  opOrderId
                                 );
                               });
                             break;
-
                           case 5:
                             gm()
-                              .in('-page',`+${x}+${y}`)
+                              .in('-page', `+${x}+${y}`)
                               .in(tiffFiles[0])
                               .in('-page', `+${twoUpX}+${y}`)
                               .in(tiffFiles[1])
@@ -206,13 +216,16 @@ init = () => {
                               .in(tiffFiles[4])
                               .mosaic()
                               .write(`${filepath}`, function (err) {
+                                if (err) {
+                                  logger.warn("ERROR WRITING COMPOSITE TIFF " + JSON.stringify(filepath))
+                                }
                                 logger.info('COMPOSITING COMPLETED.')
-                                if (err) console.log(err);
                                 addColorChannelAndWriteToDisk(
                                   filepath,
                                   artworksPath,
                                   compositeId,
-                                  tiffFiles
+                                  tiffFiles,
+                                  opOrderId
                                 );
                               });
                             break;
@@ -234,12 +247,15 @@ init = () => {
                               .mosaic()
                               .write(`${filepath}`, function (err) {
                                 logger.info('COMPOSITING COMPLETED.')
-                                if (err) console.log(err);
+                                if (err) {
+                                  logger.warn("ERROR WRITING COMPOSITE TIFF " + JSON.stringify(filepath))
+                                }
                                 addColorChannelAndWriteToDisk(
                                   filepath,
                                   artworksPath,
                                   compositeId,
-                                  tiffFiles
+                                  tiffFiles,
+                                  opOrderId
                                 );
                               });
                             break;
@@ -262,16 +278,18 @@ init = () => {
       }
     });
   });
+
 };
 
-addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles) => {
+addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles, opOrderId) => {
+  console.log(`${artworksPath}/${opOrderId}_${compositeId}_${filepath}`)
   logger.info("ADDING CMYK CHANNEL TO COMPOSITE")
   fs.readFile(`${filepath}`, function (err, file) {
     sharp(file).withMetadata({ density: 300 })
       .ensureAlpha()
       .toColourspace('cmyk')
       .tiff({ compression: 'lzw' })
-      .toFile(`${artworksPath}/${compositeId}_${filepath}`, (err, result) => {
+      .toFile(`${artworksPath}/${opOrderId}_${compositeId}_${filepath}`, (err, result) => {
         logger.info("CMYK CHANNEL ADDED TO COMPOSITE @ 300 DPI " + `${artworksPath}/${compositeId}_${filepath}`)
         if (err) throw err;
         let newPath = ''
@@ -296,10 +314,9 @@ addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles)
         })
         // compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
         //   if (response) {
-        //     logger.info("COMPOSITE ID: " + JSON.stringify(compositeId) + " RESPONSE FROM OP " + { response })
+        //     logger.info("COMPOSITE ID: " + JSON.stringify(compositeId) + ": RESPONSE FROM OP " + { response })
 
         //   }
-        //   console.log("response: " + JSON.stringify(response));
         // });
       });
   });
