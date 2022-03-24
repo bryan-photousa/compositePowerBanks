@@ -5,7 +5,8 @@ const fs = require('fs'),
 const compositeService = require('./services/composite.services');
 const fsExtra = require('fs-extra')
 const logger = require('./utilities/logger');
-const cron = require('node-cron')
+const cron = require('node-cron');
+const { errorMonitor } = require('stream');
 
 
 
@@ -24,28 +25,25 @@ let fourUpX = 5898;
 let fiveUpX = 7864;
 let sixUpX = 9830;
 
-let homePath = `${__dirname}`;
-let regex = /[.]tiff$/;
-fs
-  .readdirSync(`${homePath}`)
-  .filter((f) => regex.test(f))
-  .forEach((f) => fs.unlinkSync(homePath + '/' + f));
+
 
 let nasPath = '/Volumes/nas/48/Zazzle/auto_print/openprint'; //current path for Mac //change to windows path in production
-let today = moment().format('YYYY-MM-DD');
 
 init = () => {
+  cleanUp()
+  let today = moment().format('YYYY-MM-DD');
+
   logger.info(":::READ TIFFS AND COMPOSITE INITIALIZED:::")
   powerbankDirectories.forEach((value) => {
     let currReadDirectory;
     currReadDirectory = nasPath + '/' + value;
     fs.readdir(currReadDirectory, { withFileTypes: true }, (err, subdirs) => {
-
+      console.log({ subdirs })
       if (!subdirs) {
         logger.info("NO POWERBANK DIRECTORIES FOUND IN " + JSON.stringify(currReadDirectory))
       } else {
         subdirs.forEach((dir) => {
-          logger.info('SEARCHING FOR ' + JSON.stringify(value.split("_")[3]) + " IN " + JSON.stringify(dir.name))
+          logger.info('LINE 49: SEARCHING FOR ' + JSON.stringify(value.split("_")[3]) + " IN " + JSON.stringify(dir.name))
           let tiffFiles = [];
           let orderDirectory = '';
           let filename = '';
@@ -53,15 +51,15 @@ init = () => {
             orderDirectory = currReadDirectory + '/' + dir.name;
             let imageDirectory;
             fs.readdir(orderDirectory, { withFileTypes: true }, (err, subdirs1) => {
-              let opOrderIds
-              let artworksPath
+              let opOrderIds = ''
+              let artworksPath = ''
               subdirs1.forEach((dir1) => {
-                logger.info('SEARCHING FOR ' + JSON.stringify(value.split("_")[3]) + " IN " + JSON.stringify(dir1.name))
+                logger.info('LINE 60: SEARCHING FOR ' + JSON.stringify(value.split("_")[3]) + " IN " + JSON.stringify(dir1.name))
                 let compositeId;
                 if (dir1.name.includes("artworks")) {
                   opOrderIds = dir1.name.split("_")[1]
                   artworksPath = orderDirectory + "/" + dir1.name
-
+                  logger.info('LINE 67: SEARCHING FOR ' + artworksPath)
                 }
                 if (dir1.name.includes('images')) {
                   imageDirectory = orderDirectory + '/' + dir1.name;
@@ -72,6 +70,7 @@ init = () => {
                       let eachFile = imageDirectory + '/' + file.name;
                       tiffFiles.push(eachFile);
                     })
+                    logger.info('LINE 78: HOW MANY TIFFS: ' + tiffFiles.length)
                     Promise.all(tiffFiles).then(() => {
                       let quantity = tiffFiles.length
                       let promises = [];
@@ -91,12 +90,13 @@ init = () => {
                       Promise.all(promises).then(() => {
                         let filepath = '';
                         filepath = filename + extension;
-                        if (tiffFiles.length > 0) {                      
+                        if (tiffFiles.length > 0) {
+                          logger.info('LINE 99: About to Composite ' + filepath);
                           compositeImages(tiffFiles, filepath, artworksPath, compositeId, opOrderIds);
                         }
                       }).catch(err => {
                         if (err) {
-                          logger.info('')
+                          logger.info(err)
 
                         }
                       });
@@ -271,8 +271,6 @@ init = () => {
                 }
               });
             });
-          } else {
-            console.log('error')
           }
 
         });
@@ -283,7 +281,6 @@ init = () => {
 };
 
 addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles, opOrderIds) => {
-  console.log('oporderides: ' +JSON.stringify(opOrderIds))
   logger.info("ADDING CMYK CHANNEL TO COMPOSITE")
   fs.readFile(`${filepath}`, function (err, file) {
     sharp(file).withMetadata({ density: 300 })
@@ -294,6 +291,7 @@ addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles,
         logger.info("CMYK CHANNEL ADDED TO COMPOSITE @ 300 DPI " + `${artworksPath}/${compositeId}_${filepath}`)
         if (err) throw err;
         let newPath = ''
+
         tiffFiles.forEach(file => {
           let find = "downloaded"
           let re = new RegExp(find, 'g')
@@ -319,17 +317,24 @@ addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles,
 
         //   }
         // });
-      });
+      })
   });
 };
 
+cleanUp = () => {
+  let homePath = `${__dirname}`;
+  let regex = /[.]tiff$/;
+  fs
+    .readdirSync(`${homePath}`)
+    .filter((f) => regex.test(f))
+    .forEach((f) => fs.unlinkSync(homePath + '/' + f));
+}
 
-cron.schedule('40 7 * * *', function(){
+
+// init()
+
+cron.schedule('40 7 * * *', function () {
   logger.info('CRONJOB INITIALIZED')
   init()
 })
 
-cron.schedule('40 12 * * *', function(){
-  logger.info('CRONJOB INITIALIZED')
-  init()
-})
