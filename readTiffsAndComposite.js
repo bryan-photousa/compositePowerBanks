@@ -6,7 +6,6 @@ const compositeService = require('./services/composite.services');
 const fsExtra = require('fs-extra')
 const logger = require('./utilities/logger');
 const cron = require('node-cron');
-const { errorMonitor } = require('stream');
 
 
 
@@ -27,9 +26,14 @@ let sixUpX = 9830;
 
 
 
-let nasPath = '/Volumes/nas/48/Zazzle/auto_print/openprint'; //current path for Mac //change to windows path in production
 
-init = () => {
+init = (system) => {
+  if(!system){
+    logger.warn("ERROR: NO SYSTEM SPECIFIED!")
+    return false
+  }
+  let nasPath = `/Volumes/nas/48/Zazzle/auto_print/${system}`; //current path for Mac //change to windows path in production
+
   cleanUp()
   let today = moment().format('YYYY-MM-DD');
 
@@ -309,9 +313,8 @@ addColorChannelAndWriteToDisk = (filepath, artworksPath, compositeId, tiffFiles,
             }
             logger.info(`${file} moved to ${newPath}`)
           })
-
         })
-        // compositeService.changeCompositeToDownloaded(compositeId).then((response) => {
+        // compositeService.changeCompositeToDownloaded(compositeId, system).then((response) => {
         //   if (response) {
         //     logger.info("COMPOSITE ID: " + JSON.stringify(compositeId) + ": RESPONSE FROM OP " + { response })
 
@@ -331,10 +334,16 @@ cleanUp = () => {
 }
 
 
-// init()
+init('iprint')
+// init('openprint')
+
+// cron.schedule('40 7 * * *', function () {
+//   logger.info('Openprint CRONJOB INITIALIZED')
+//   init('openprint')
+// })
 
 cron.schedule('40 7 * * *', function () {
-  logger.info('CRONJOB INITIALIZED')
-  init()
+  logger.info('iPrint CRONJOB INITIALIZED')
+  init('iprint')
 })
 
