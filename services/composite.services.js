@@ -11,7 +11,6 @@ const headers = {
 
 changeCompositeToDownloaded = (compositeId, system) => {
   let baseUrl = ''
-  
   baseUrl = system == 'openprint' ? `${process.env.OPENPRINT_URL}` : `${process.env.IPRINT_URL}`;
 
   let id = {
